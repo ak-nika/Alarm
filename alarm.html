@@ -9,7 +9,7 @@
             background-color: rgb(242, 242, 242);
             font-family: sans-serif;
         }
-        main{ 
+        section{ 
             width: 50%;
             padding: 10px 0px;
             margin: auto;
@@ -23,12 +23,65 @@
     </style>
 </head>
 <body> 
-    <main>
+    <section>
         <p>Time</p>
         <h1 id="h1"></h1>
-    </main>
+        <div>
+            <main>
+                <label for="alarmTime">Set an Alarm</label>
+                <input type="time" id="alarmTime">
+            </main>
+            <button onclick="setAlarm()">Set Alarm</button>
+            <button onclick="stopAlarm()">Stop Alarm</button>
+        </div>
+        <h2 id="clock">00:00:00</h2>
+    </section>
 </body>
 <script>
+    let alarmInterval;
+
+    function setAlarm(){
+        const alarmTime = document.getElementById("alarmTime");
+        if (alarmTime) {
+            const now = new Date();
+            const alarm = new Date(now.toDateString() + ' ' + alarmTime);
+
+            const currentTime = new Date();
+            const timeUntilAlarm = alarm - currentTime;
+
+            if (timeUntilAlarm <= 0) {
+                alert("Please enter a time that is in the future");
+                return
+            }
+
+            alarmInterval = setInterval(function () {
+                const currentTime = new Date();
+                const timeUntilAlarm = alarm - currentTime;
+
+                if(timeUntilAlarm <= 0){
+                    alert("Time's up")
+                    clearInterval(alarmInterval);
+                } else {
+                    displayTime(timeUntilAlarm);
+                }
+            }, 1000)
+        }
+    }
+
+    function displayTime(time) {
+            const hours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((time % (1000 * 60)) / 1000);
+
+            const timeString = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            document.getElementById("clock").textContent = timeString;
+    }
+
+    function stopAlarm() {
+            clearInterval(alarmInterval);
+            document.getElementById("clock").textContent = '00:00:00';
+    }
+
     setInterval(()=>{
         let h1 = document.getElementById("h1");
         let date = new Date();
