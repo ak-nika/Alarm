@@ -1,27 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Alarm</title>
-    <link rel="stylesheet" href="alarm.css">
-</head>
-<body> 
+    <link rel="stylesheet" href="alarm.css" />
+  </head>
+  <body>
     <section>
-        <p>Time</p>
-        <h1 id="h1"></h1>
-        <div>
-            <main>
-                <label for="alarmTime">Set an Alarm</label>
-                <input type="time" id="alarmTime">
-            </main>
-            <div class="div1">
-                <button onclick="setAlarm()">Set Alarm</button>
-                <button onclick="stopAlarm()">Stop Alarm</button>
-            </div>
+      <p>Time</p>
+      <h1 id="h1"></h1>
+      <div>
+        <main>
+          <label for="alarmTime">Set an Alarm</label>
+          <input type="time" id="alarmTime" />
+        </main>
+        <div class="div1">
+          <button onclick="addAlarm()">Set Alarm</button>
         </div>
-        <h2 id="clock"></h2>
+      </div>
     </section>
-</body>
-<script src="alarm.js"></script>
+    <table>
+        <tr>
+            <thead>
+                <th>Time</th>
+                <th>Countdown</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </thead>
+            <tbody id="alarmsContainer"></tbody>
+        </tr>
+    </table>
+  </body>
+  <script src="alarm.js"></script>
 </html>
